@@ -118,18 +118,12 @@ AO73
 RS44
 ```
 
-同时也接受带连字符的写法：
-
-```text
-JO-97
-AO-73
-RS-44
-```
-
 例如：
 
 ```bash
 python wsjtx_to_satlog.py --sat JO97 --input wsjtx_log.adi
+或者
+wsjtx_to_satlog.exe --sat JO97 --input wsjtx_log.adi
 ```
 
 表示把日志转换为 **JO-97** 卫星日志。
@@ -144,6 +138,8 @@ python wsjtx_to_satlog.py --sat JO97 --input wsjtx_log.adi
 
 ```bash
 python wsjtx_to_satlog.py --sat AO73 --input wsjtx_log.adi
+或者
+wsjtx_to_satlog.exe --sat AO73 --input wsjtx_log.adi
 ```
 
 支持的输入文件类型：
@@ -151,9 +147,6 @@ python wsjtx_to_satlog.py --sat AO73 --input wsjtx_log.adi
 ```text
 .adi
 .adif
-.log
-.csv
-.txt
 ```
 
 脚本会根据扩展名以及文件内容自动判断输入格式。
@@ -168,12 +161,18 @@ python wsjtx_to_satlog.py --sat AO73 --input wsjtx_log.adi
 python wsjtx_to_satlog.py \
     --sat RS44 \
     --input "C:\Users\User\AppData\Local\WSJT-X\wsjtx_log.adi"
+或者
+wsjtx_to_satlog.exe \
+    --sat RS44 \
+    --input "C:\Users\User\AppData\Local\WSJT-X\wsjtx_log.adi"
 ```
 
 Windows PowerShell / CMD 中也可以直接写成一行：
 
 ```bash
 python wsjtx_to_satlog.py --sat RS44 --input "C:\Users\User\AppData\Local\WSJT-X\wsjtx_log.adi"
+或者
+wsjtx_to_satlog.exe --sat RS44 --input "C:\Users\User\AppData\Local\WSJT-X\wsjtx_log.adi"
 ```
 
 ---
@@ -186,12 +185,16 @@ python wsjtx_to_satlog.py --sat RS44 --input "C:\Users\User\AppData\Local\WSJT-X
 
 ```bash
 python wsjtx_to_satlog.py --sat AO73 --input wsjtx_log.adi --output AO73-FT4.adi
+或者
+wsjtx_to_satlog.exe --sat AO73 --input wsjtx_log.adi --output AO73-FT4.adi
 ```
 
 指定绝对路径：
 
 ```bash
 python wsjtx_to_satlog.py --sat AO73 --input wsjtx_log.adi --output "D:\SatelliteLog\AO73-FT4.adi"
+或者
+wsjtx_to_satlog.exe --sat AO73 --input wsjtx_log.adi --output "D:\SatelliteLog\AO73-FT4.adi"
 ```
 
 如果输出目录不存在，脚本会自动创建。
@@ -230,24 +233,14 @@ C:\Log\satellite-2026.adi
 C:\Log\satellite-2026-output.adi
 ```
 
-### 输入为 `.log` / `.csv` / `.txt`
-
-统一输出为 `.adi`：
-
-```text
-wsjtx.log
-↓
-wsjtx-output.adi
-```
-
----
-
 # 9. 完整示例
 
 ## 示例 1：JO-97
 
 ```bash
 python wsjtx_to_satlog.py --sat JO97 --input wsjtx_log.adi
+或者
+wsjtx_to_satlog.exe --sat JO97 --input wsjtx_log.adi
 ```
 
 输出：
@@ -262,24 +255,12 @@ QSOs      : 128
 
 ---
 
-## 示例 2：AO-73
-
-```bash
-python wsjtx_to_satlog.py --sat AO73 --input wsjtx.log
-```
-
-默认生成：
-
-```text
-wsjtx-output.adi
-```
-
----
-
-## 示例 3：RS-44 并指定输出文件
+## 示例 2：RS-44 并指定输出文件
 
 ```bash
 python wsjtx_to_satlog.py --sat RS44 --input wsjtx_log.adi --output "D:\SatelliteLog\RS44-2026-09.adi"
+或者
+wsjtx_to_satlog.exe --sat RS44 --input wsjtx_log.adi --output "D:\SatelliteLog\RS44-2026-09.adi"
 ```
 
 ---
@@ -356,32 +337,7 @@ SUBMODE = FT4
 
 ---
 
-# 12. 关于频率
-
-脚本只负责**日志格式转换**。
-
-不会根据卫星轨道或过站时间自动进行：
-
-- Doppler 计算
-- 上行频率计算
-- 下行频率计算
-- TX/RX 频率重建
-- 轨道位置计算
-
-因此输入日志中的：
-
-```text
-FREQ
-RX_FREQ
-```
-
-等字段会尽可能原样保留。
-
-这样可以避免脚本在缺少实际设备频率、晶振误差、Doppler 轨迹等信息时生成错误的频率数据。
-
----
-
-# 13. 错误处理
+# 12. 错误处理
 
 ### 输入文件不存在
 
@@ -483,12 +439,30 @@ python3 wsjtx_to_satlog.py --sat JO97 --input wsjtx_log.adi
 
 ---
 
-# 16. 查看帮助
+# 16. 直接运行EXE文件(推荐)
+
+完整命令：
+
+```bash
+wsjtx_to_satlog.exe --sat JO97 --input "C:\Log\wsjtx_log.adi" --output "C:\Log\JO97-FT4.adi"
+```
+
+也可以使用：
+
+```bash
+wsjtx_to_satlog.exe --sat JO97 --input wsjtx_log.adi
+```
+
+---
+
+# 17. 查看帮助
 
 执行：
 
 ```bash
 python wsjtx_to_satlog.py --help
+或者
+wsjtx_to_satlog.exe --help
 ```
 
 会显示：
@@ -546,8 +520,3 @@ python wsjtx_to_satlog.py --sat AO73 --input wsjtx.log
 python wsjtx_to_satlog.py --help
 ```
 
----
-
-## License
-
-脚本可作为个人无线电日志处理工具自由修改和使用。
